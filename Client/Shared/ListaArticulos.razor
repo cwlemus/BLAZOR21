@@ -1,0 +1,29 @@
+﻿@using appBlazorIntro.Shared
+<table class="table">
+    <thead>
+        <tr>
+            <th>Categoria</th>
+            <th>Articulo</th>
+            <th>Se realizo o no</th>
+            <th>Fecha</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in lstArticulos)
+        {
+        <tr>
+            <td>@item.Categoria</td>
+            <td>@item.NombreArticulo</td>
+            <td>@item.IsConsumo</td>
+            <td>@item.FechaRegistro</td>
+        </tr>
+
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<Articulo> lstArticulos { get; set; }
+}

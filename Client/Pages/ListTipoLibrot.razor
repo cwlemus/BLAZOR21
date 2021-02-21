@@ -1,0 +1,29 @@
+﻿@page "/listTipoLibro"
+@using appBlazorIntro.Shared
+@inject HttpClient http
+
+
+@code{
+    string[] cabecerasTabla = { "Id tipo libro", "Nombre", "Descripcion" };
+}
+
+<ListaRazor cabeceras=cabecerasTabla lista=listaTipoLibro
+            type="text"
+            button="false"
+            label="Ingrese tipo libro"
+            eventBusqueda="BusquedaTipoLibro" />
+
+@code {
+    private TipoLibro[] listaTipoLibro;
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaTipoLibro = await http.GetFromJsonAsync<TipoLibro[]>("api/TipoLibro/Get");
+    }
+
+    public async Task BusquedaTipoLibro(string data)
+    {
+        listaTipoLibro = await http.GetFromJsonAsync<TipoLibro[]>("api/TipoLibro/Filtrar/"+data);
+
+    }
+}

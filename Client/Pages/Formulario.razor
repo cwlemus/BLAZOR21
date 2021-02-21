@@ -1,0 +1,55 @@
+﻿@page "/Formulario"
+
+<div class="form-group">
+    <label>Ingrese numero 1</label>
+    <input type="text" @bind="numero1" class="form-control" />
+</div>
+
+<div class="form-group">
+    <label>Ingrese numero 2</label>
+    <input type="text" @bind="numero2" class="form-control" />
+</div>
+<button class="btn btn-info" @onclick="sumar">Sumar</button>
+<button class="btn btn-danger" @onclick="restar">Restar</button>
+<button class="btn btn-dark" @onclick="multiplicar">Multiplicar</button>
+<p>Resultado: @resultado</p>
+
+<h1>Uso del bind</h1>
+
+<label>Ingrese valor</label>
+<input class="form-control" type="text" @bind="numero" />
+
+<label>Reactividad</label>
+<input class="form-control" type="text" @bind="@numero" />
+
+<h1>Uso del bind-value</h1>
+
+<label>Ingrese valor</label>
+<input class="form-control" type="text" @bind-value="numeroValue" @bind-value:event="oninput" />
+
+<label>Reactividad</label>
+<input class="form-control" type="text" value="@numeroValue"  />
+@code {
+    //el valor de numero
+    private int numero = 0;
+    private int numeroValue = 0;
+
+    private int numero1 = 0;
+    private int numero2 = 0;
+    private int resultado = 0;
+
+    public void sumar()
+    {
+        resultado = numero1 + numero2;
+    }
+
+    public void restar()
+    {
+        resultado = numero1 - numero2;
+    }
+
+    public void multiplicar()
+    {
+        resultado = numero1 * numero2;
+    }
+}

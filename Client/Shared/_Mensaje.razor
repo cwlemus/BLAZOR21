@@ -1,0 +1,18 @@
+﻿
+<div class="alert alert-danger">
+    
+    <ul>
+        @foreach (var item in tipoMensaje)
+        {
+        <li>@mensaje @item</li>
+        }
+    </ul>
+
+</div>
+
+@code {
+    [Parameter]
+    public string mensaje { get; set; } = "Mensaje desplegado en varias partes de la app de tipo ";
+    [Parameter]
+    public String[] tipoMensaje { get; set; } = { "Error", "Infomativo", "Advertencia" };
+}

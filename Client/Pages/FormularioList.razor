@@ -1,0 +1,61 @@
+﻿@page "/FormularioList"
+@using appBlazorIntro.Shared
+<form @onsubmit="registrar">
+    <div class="form-group">
+        <label>Seleccione articulo a registrar</label>
+        <select class="form-control" @bind="cbxCategoria">
+            <option value="">--Seleccione--</option>
+            <option value="Hogar">Hogar</option>
+            <option value="Cosmeticos">Cosmeticos</option>
+            <option value="Bebidas">Bebidas</option>
+            <option value="Alimentos">Alimentos</option>
+            <option value="Lacteos">Lacteos</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Ingrese Articulo</label>
+        <input type="text" class="form-control" @bind="txtArticulo" />
+    </div>
+
+    <div class="form-group">
+        <label>Fecha de Registro</label>
+        <input type="date" class="form-control" @bind="fechaRegistro" @bind:format="yyyy-MM-dd" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Disponible a cliente</label>
+        <input type="checkbox" @bind="chkIsConsumo" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" name="name" class="btn btn-primary" value="Registrar" />
+    </div>
+</form>
+
+<ListaArticulos lstArticulos=articulos/>
+
+
+
+@code {
+
+    public List<Articulo> articulos = new List<Articulo>();
+
+    public string cbxCategoria { get; set; }
+    public string txtArticulo { get; set; }
+    public Boolean chkIsConsumo { get; set; }
+    public DateTime fechaRegistro = DateTime.Now;
+
+    public void registrar()
+    {
+        articulos.Add(new Articulo
+        {
+            Categoria = cbxCategoria,
+            NombreArticulo = txtArticulo,
+            IsConsumo = chkIsConsumo,
+            FechaRegistro = fechaRegistro
+        });
+    }
+
+}

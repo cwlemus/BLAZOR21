@@ -1,0 +1,27 @@
+﻿
+@page "/formbinder"
+
+<h1>Uso del bind</h1>
+
+<label>Ingrese valor</label>
+<input class="form-control" type="text" @bind="numero" />
+
+<label>Reactividad</label>
+<input class="form-control" type="text" @bind="@numero" />
+
+<h1>Uso del bind-value</h1>
+
+<label>Ingrese valor</label>
+<input class="form-control" type="text" @bind-value="numeroValue" @bind-value:event="oninput" />
+
+<label>Reactividad</label>
+<input class="form-control" type="text" value="@numeroValue" />
+
+
+
+@code {
+    //el valor de numero
+    private int numero = 0;
+    private int numeroValue = 0;
+}
+

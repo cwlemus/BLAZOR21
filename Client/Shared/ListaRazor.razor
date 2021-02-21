@@ -1,0 +1,81 @@
+﻿
+@if (lista == null)
+{
+    <h1>Cargando....</h1>
+}
+else
+{
+
+    @if (type != "none")
+    {
+        <label>@label</label>
+        @if (type == "text")
+        {
+            @if (button)
+            {
+                <div class="mb-4" style="display:grid;grid-template-columns:8fr 1fr">
+                    <input type="text" class="form-check form-control" @bind-value="valor" @bind-value:event="oninput" />
+                    <button class="btn btn-primary" @onclick="Busqueda">Buscar</button>
+                </div>
+            }
+            else
+            {
+                <div class="mb-4">
+                    <input type="text" class="form-check form-control" @bind-value="valor" @bind-value:event="oninput" @onkeyup="Busqueda" />
+                    
+                </div>
+            }
+
+        }
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                @foreach (var item in cabeceras)
+                {
+                    <td>@item</td>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (object obj in lista)
+            {
+                <tr>
+                    @foreach (var prop in obj.GetType().GetProperties())
+                    {
+                        <td>@prop.GetValue(obj)</td>
+                    }
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+}
+@code {
+    public string valor { get; set; }
+
+    [Parameter]
+    public string[] cabeceras { get; set; }
+
+    [Parameter]
+    public object[] lista { get; set; }
+
+    [Parameter]
+    public string type { get; set; } = "none";
+
+    [Parameter]
+    public string label { get; set; } = "";
+
+    [Parameter]
+    public bool button { get; set; } = true;
+
+    [Parameter]
+    public EventCallback<string> eventBusqueda { get; set; }
+
+    public void Busqueda()
+    {
+        eventBusqueda.InvokeAsync(valor);
+    }
+
+}
